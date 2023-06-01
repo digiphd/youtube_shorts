@@ -1,7 +1,6 @@
 
-import os
 import time
-import TranscriptionAgent
+from agents.TranscriptionAgent import process_video as transcribe
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from concurrent.futures import ThreadPoolExecutor
@@ -15,7 +14,7 @@ class FileHandler(FileSystemEventHandler):
             pool = ThreadPoolExecutor(max_workers=4)
             if filepath.endswith(".mp4") or filepath.endswith(".mov"):
                 print(f"New video file added: {filepath}")
-                pool.submit(TranscriptionAgent.process_video, filepath)
+                pool.submit(transcribe, filepath)
 
 def monitor_folder(folder_path):
     event_handler = FileHandler()
@@ -30,6 +29,3 @@ def monitor_folder(folder_path):
         observer.stop()
     observer.join()
 
-if __name__ == "__main__":
-    folder_path = "/Users/roger/Desktop/youtube_shorts/"
-    monitor_folder(folder_path)

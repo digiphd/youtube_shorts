@@ -1,5 +1,31 @@
-.srt
-.json
-venv/*
-__pycache__/*
-.mp4
+
+
+# Ignore virtual environment directories
+venv/
+env/
+.env
+
+# Ignore Python cache and compiled files
+__pycache__/
+*__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore macOS files
+.DS_Store
+
+# Ignore temporary files
+*.tmp
+*.swp
+
+# Ignore specific file extensions
+*.srt
+*.json
+*.mp4
+
+# Ignore application-specific folders
+instance/
