@@ -1,0 +1,5 @@
+.srt
+.json
+venv/*
+__pycache__/*
+.mp4
