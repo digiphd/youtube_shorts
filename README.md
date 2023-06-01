@@ -32,13 +32,13 @@ The project requires Python 3.6+ and uses the following libraries and APIs:
 
 ## Running the System
 
-- Run the `main.py` with a folder path as an argument to monitor for new video files. e.g. `python main.py <existing-folder-to-watch>`
+- Run the `main.py` with a folder path as an argument to monitor for new video files. e.g. `python main.py "<existing-folder-to-watch>"`
 - Drop the video files in the folder, and the system automatically processes them and create the shorts with captions.
 
 ## TODO Wishlist
-- Make the folder if it doesn't exist
+- Make the input folder if it doesn't exist
 - Better exception handling and logging
 - Better handling of tempory files
-- Create youtube meta data with GPT
+- Create youtube meta data (title, description, tags and hashtags) with GPT
 - More advanced editing of the original input video based on the script and VAD
 - Maybe write a blog, tweet and linkedin post with GPT from the transcript
