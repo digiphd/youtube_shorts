@@ -1,7 +1,9 @@
 
 from loguru import logger
 import subprocess
-from tools.transcibe import transcribe_audio
+from agents.tools.transcibe import transcribe_audio
+from agents.tools.instance_dir import create_temp_folder, remove_temp_folder
+import os
 
 def add_captions(input_video: str, caption_file: str, output_video: str) -> None:
     """
@@ -33,13 +35,23 @@ def crop_video(input_video: str, segment, output_video: str) -> None:
 
 def process_video(input_video, segments):
     logger.info('Editing Video')
-    subclips = []
-    for i, segment in enumerate(segments):
-            logger.info(f"Segment: {segment}")
-            subclip_path = f"/Users/roger/Desktop/youtube_shorts/output_short_{i}.mp4"
-            subclip_tmp_path = f"./subclip_{i}_temp.mp4"
-            caption_file = f"./subclip_captions_{i}.srt"
-            crop_video(input_video, segment, subclip_tmp_path)
-            add_captions(subclip_tmp_path, caption_file, subclip_path)
+    
+    # Create temporary folder for storing intermediate files
+    temp_folder = create_temp_folder("instance")
 
-            subclips.append(subclip_path)
+    input_video_folder = os.path.dirname(input_video)
+
+    subclips = []
+    for i, segment in enumerate(segments):     
+        subclip_path = os.path.join(input_video_folder, f"output_short_{i}.mp4")
+        subclip_tmp_path = os.path.join(temp_folder, f"subclip_{i}_temp.mp4")
+        caption_file = os.path.join(temp_folder, f"subclip_captions_{i}.srt")
+
+        # Crop and add captions to video
+        crop_video(input_video, segment, subclip_tmp_path)
+        add_captions(subclip_tmp_path, caption_file, subclip_path)
+
+        subclips.append(subclip_path)
+    
+    # Remove temporary folder and intermediate files
+    remove_temp_folder(temp_folder)

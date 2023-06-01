@@ -1,13 +1,12 @@
 import openai
-import VideoEditingAgent
+from agents.VideoEditingAgent import process_video as editor
 import os
-from tools.transcibe import transcribe_audio
+from agents.tools.transcibe import transcribe_audio
 from loguru import logger
 import backoff
-import json
 import datetime as datetime
 from Levenshtein import distance
-import re
+
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
 SYSTEM_PROMPT = "You are exceptional at scaning through text and finding the most suitable text which is could be interesting to people, your skill is unparalleled. Your comprehensive knowledge of the english language and mastery of story telling enable you to find captivating text that intrigue and draw people in. That said the last thing you want to do is mislead viewers by stating unfactual things, or misrepresenting the any reference material you may be provided."
@@ -123,7 +122,7 @@ def process_video(video_file_path):
     interesting_points = find_interesting_points(script)
     segments = get_phrase_timing(interesting_points, word_dict)
     # Pass video and captions to the next agents
-    VideoEditingAgent.process_video(video_file_path, segments)
+    editor(video_file_path, segments)
 
 
 if __name__ == "__main__":
