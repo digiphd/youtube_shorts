@@ -1,0 +1,6 @@
+backoff==2.2.1
+loguru==0.7.0
+openai==0.27.7
+python_Levenshtein==0.21.0
+watchdog==3.0.0
+whisper-timestamped @ git+https://github.com/linto-ai/whisper-timestamped@2c55305d6aa53f0c0fa1fe63fc85c33bfa60e963
