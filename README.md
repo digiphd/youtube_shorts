@@ -4,6 +4,8 @@ This project contains a multi-agent system to process landscape talking head vid
 
 This is in no way complete code. It was built just for fun at a social event over a couple of hours.
 
+If your a content creator, feel free to use this tool and modify it to your liking. If you could just link back to the repo that would be great!
+
 ## Assumptions
 1. The input video is mostly spoken dialog
 2. The input video is in landscape mode contains a talking head in the center
